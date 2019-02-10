@@ -20,6 +20,18 @@ func InitRouter() *rest.Api {
 		rest.Delete("/persons/:id", EmployeeHandler.Delete),
 	)
 
+	api.Use(&rest.CorsMiddleware{
+		RejectNonCorsRequests: false,
+		OriginValidator: func(origin string, request *rest.Request) bool {
+			return true //origin == "https://www.w3schools.com"
+		},
+		AllowedMethods: []string{"GET", "POST", "PUT"},
+		AllowedHeaders: []string{
+			"Accept", "Content-Type", "X-Custom-Header", "Origin"},
+		AccessControlAllowCredentials: true,
+		AccessControlMaxAge:           3600,
+	})
+
 	if err != nil {
 		log.Println("Erro")
 	}

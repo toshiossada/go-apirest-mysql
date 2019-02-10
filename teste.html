@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.get("http://localhost:3000/persons", function (data, status) {
+                    $("#resultBody").html("");
+                    $.each(data, function (i, item) {
+                        $("#resultBody").append(`<tr><td>${item.id}</td><td>${item.name}</td><td>${item.city}</td>`); 
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <table id="result">
+        <thead>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Cidade</th>
+        </thead>
+        <tbody id="resultBody">
+
+        </tbody>
+    </table>
+    <button>fazer requisição</button>
+
+</body>
+
+</html>
